@@ -1,6 +1,6 @@
 name: TimeLimit
 main: de.ksrmx.bukkitpl.timelimit.TimeLimitPlugin
-version: 0.1
+version: 0.1.1
 author: Paulli
 api-version: 1.20
 

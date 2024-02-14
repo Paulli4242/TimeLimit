@@ -1,8 +1,8 @@
 package de.ksrmx.bukkitpl.timelimit.timerules;
 
 import de.ksrmx.bukkitpl.timelimit.main.PlayerData;
-import org.ccffee.utils.io.ByteConverter;
-import org.ccffee.utils.io.ByteUtils;
+import de.ksrmx.libs.utils.io.ByteConverter;
+import de.ksrmx.libs.utils.io.ByteUtils;
 
 public abstract class TimeRule<T extends TimeRule<T>> implements ITimeRule, ByteConverter<TimeRuleData<T>> {
     protected static final TimeRuleData EMPTY_DATA = new TimeRuleData() {};

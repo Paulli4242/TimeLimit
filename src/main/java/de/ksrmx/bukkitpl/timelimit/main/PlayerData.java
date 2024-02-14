@@ -3,7 +3,7 @@ package de.ksrmx.bukkitpl.timelimit.main;
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.permissions.Permissible;
-import org.ccffee.utils.io.ByteUtils;
+import de.ksrmx.libs.utils.io.ByteUtils;
 
 import java.util.UUID;
 
@@ -131,7 +131,7 @@ public class PlayerData implements PlayTime {
         }else return false;
     }
 
-    public static final class ByteConverter implements org.ccffee.utils.io.ByteConverter<PlayerData>{
+    public static final class ByteConverter implements de.ksrmx.libs.utils.io.ByteConverter<PlayerData> {
 
         @Override
         public PlayerData fromBytes(byte[] bytes) {

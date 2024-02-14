@@ -2,11 +2,7 @@ package de.ksrmx.bukkitpl.timelimit.commands;
 
 import de.ksrmx.bukkitpl.timelimit.Messages;
 import de.ksrmx.bukkitpl.timelimit.main.TimeLimiter;
-import org.bukkit.command.Command;
-import org.bukkit.command.CommandSender;
-import org.bukkit.configuration.file.FileConfiguration;
-import org.bukkit.configuration.file.YamlConfiguration;
-import org.ccffee.utils.iteration.ArrayUtils;
+import de.ksrmx.libs.utils.iteration.ArrayUtils;
 
 public class TimeCommand extends SuperCommand{
 

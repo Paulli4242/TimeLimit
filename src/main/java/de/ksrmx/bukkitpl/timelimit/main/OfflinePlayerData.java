@@ -3,8 +3,8 @@ package de.ksrmx.bukkitpl.timelimit.main;
 import de.ksrmx.bukkitpl.timelimit.FormatException;
 import org.bukkit.permissions.Permissible;
 import org.bukkit.permissions.PermissionAttachmentInfo;
-import org.ccffee.utils.io.ByteConverter;
-import org.ccffee.utils.io.ByteUtils;
+import de.ksrmx.libs.utils.io.ByteConverter;
+import de.ksrmx.libs.utils.io.ByteUtils;
 
 import java.util.HashMap;
 import java.util.Map;
