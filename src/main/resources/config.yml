@@ -1,0 +1,45 @@
+update-interval: 1 #update interval in seconds
+
+rules:
+  daily:
+    type: interval-add
+    add-time: 3600 #time to add in seconds
+    interval-type: daily
+    #posible interval-types:
+    #   secondly,
+    #   minutely,
+    #   hourly,
+    #   daily,
+    #   weekly,
+    # COMING SOON:
+    #   monthly,
+    #   yearly
+    interval-format: hh-mm-ss
+    #posible interval format characters
+    #   s -> seconds
+    #   m -> minutes
+    #   h -> hours
+    #   W -> days of week
+    # COMING SOON:
+    #   D -> days of month
+    #   M -> months
+    #   Y -> Years
+    interval-time: 00-00-00
+    #permissions:
+    #  - permission1
+    #  - permission2
+  ignore:
+    type: interval-ignore
+    interval-type: weekly
+    interval-format: WW-hh-mm-ss
+    from-time: SA-00-00-00
+    to-time: SA-23-59-59
+    #permissions:
+    #  - permission1
+    #  - permission2
+  join:
+    type: first-join-add
+    add-time: 3600
+    #permissions:
+    #  - permission1
+    #  - permission2

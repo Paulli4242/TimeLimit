@@ -1,0 +1,26 @@
+name: TimeLimit
+main: de.ksrmx.bukkitpl.timelimit.TimeLimitPlugin
+version: 0.1
+author: Paulli
+api-version: 1.20
+
+commands:
+  time-limit:
+    usage: time
+    description: every command about time
+permissions:
+  time-limit.see:
+    default: true
+  time-limit.give:
+    default: false
+  time-limit.take:
+    default: false
+  time-limit.pay:
+    default: false
+  time-limit.*:
+    default: op
+    children:
+      time-limit.see: true
+      time-limit.give: true
+      time-limit.take: true
+      time-limit.pay: true
