@@ -3,6 +3,8 @@ package de.ksrmx.bukkitpl.timelimit.commands;
 import de.ksrmx.bukkitpl.timelimit.Messages;
 import de.ksrmx.bukkitpl.timelimit.main.PlayTime;
 import de.ksrmx.bukkitpl.timelimit.main.TimeLimiter;
+import de.ksrmx.bukkitpl.timelimit.time.DynamicTimeSpanFormatter;
+import de.ksrmx.bukkitpl.timelimit.time.TimeSpanUnit;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
@@ -10,12 +12,14 @@ import org.bukkit.entity.Player;
 import de.ksrmx.libs.utils.iteration.ArrayUtils;
 
 import java.util.ArrayList;
+import java.util.EnumSet;
 import java.util.List;
 
 public class PayCommand extends ACommand {
 
     private Messages messages;
     private TimeLimiter timeLimiter;
+    private final DynamicTimeSpanFormatter timeSpanFormatter = new DynamicTimeSpanFormatter(3, EnumSet.allOf(TimeSpanUnit.class));
 
     public PayCommand(Messages messages, TimeLimiter timeLimiter) {
         super(ArrayUtils.of("pay"),ArrayUtils.of("time-limit.*","time-limit.pay"));
@@ -33,11 +37,11 @@ public class PayCommand extends ACommand {
                     PlayTime ptr = timeLimiter.getPlayTime(player.getUniqueId());
                     if (ptr != null) {
                         try {
-                            long l = Long.parseLong(args[1]);
-                            if (pts.getTime() >= l * 1000) {
-                                if (pts.removeTime(timeLimiter, l * 1000)) {
-                                    ptr.addTime(timeLimiter, l*1000);
-                                    messages.sendMessage(sender, "command.time-limit.pay.success", "%SECONDS%", Long.toString(l), "%PLAYER%", player.getName());
+                            long l = Long.parseLong(args[1])*1000;
+                            if (pts.getTime() >= l) {
+                                if (pts.removeTime(timeLimiter, l)) {
+                                    ptr.addTime(timeLimiter, l);
+                                    messages.sendMessage(sender, "command.time-limit.pay.success", "%TIME%", timeSpanFormatter.format(l), "%PLAYER%", player.getName());
                                     messages.sendMessage(player, "command.time-limit.pay.success-target","%PLAYER%",p.getName(),"%SECONDS%",Long.toString(l));
                                 } else {
                                     messages.sendMessage(sender, "command.time-limit.pay.invalid-number", "%NUMBER%", args[1]);

@@ -136,7 +136,6 @@ public class PlayerData implements PlayTime {
         @Override
         public PlayerData fromBytes(byte[] bytes) {
             byte[][] matrix = ByteUtils.unpack(bytes);
-            System.out.println(matrix.length);
             if(matrix.length!=4)throw new IllegalArgumentException("unable to deserialize");
             return new PlayerData(
                     UUID.fromString(ByteConverter.STRING.fromBytes(matrix[0])),

@@ -12,6 +12,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 import java.io.File;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.Objects;
 
 public class TimeLimitPlugin extends JavaPlugin {
 
@@ -48,8 +49,7 @@ public class TimeLimitPlugin extends JavaPlugin {
         messages = new Messages(messagesConfig);
         //init commands
         TimeCommand cmd = new TimeCommand(timeLimiter, messages);
-        Bukkit.getPluginCommand("time-limit").setExecutor(cmd);
-        Bukkit.getPluginCommand("tl").setExecutor(cmd);
+        Objects.requireNonNull(Bukkit.getPluginCommand("time-limit")).setExecutor(cmd);
 
         //init time limiter
         int interval = config.getInt("update-interval",1);

@@ -1,5 +1,6 @@
 package de.ksrmx.bukkitpl.timelimit.commands;
 
+import de.ksrmx.bukkitpl.timelimit.Messages;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 
@@ -12,16 +13,19 @@ import java.util.Objects;
 public class SuperCommand extends ACommand {
 
     private ACommand[] subCommand;
+    protected Messages messages;
 
 
 
-    public SuperCommand(String[] names,String[] permissions, ACommand... subCommand){
+    public SuperCommand(String[] names,String[] permissions, Messages messages, ACommand... subCommand){
         super(names,permissions);
+        this.messages = messages;
         this.subCommand = subCommand;
     }
-    public SuperCommand(String[] names, ACommand... subCommand){
+    public SuperCommand(String[] names, Messages messages, ACommand... subCommand){
         super(names,new String[0]);
         this.subCommand = subCommand;
+        this.messages = messages;
     }
 
     @Override
@@ -33,12 +37,12 @@ public class SuperCommand extends ACommand {
             }else{
                return alternateExecution(sender, command, label, args);
             }
-        }
+        }else
         return true;
     }
 
     public boolean alternateExecution(CommandSender sender, Command command, String label, String[] args){
-        sender.sendMessage("Unknown Command");
+        messages.sendMessage(sender,"command.time-limit.invalid");
         return true;
     }
 

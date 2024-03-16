@@ -2,6 +2,8 @@ package de.ksrmx.bukkitpl.timelimit.commands;
 
 import de.ksrmx.bukkitpl.timelimit.Messages;
 import de.ksrmx.bukkitpl.timelimit.main.TimeLimiter;
+import de.ksrmx.bukkitpl.timelimit.time.DynamicTimeSpanFormatter;
+import de.ksrmx.bukkitpl.timelimit.time.TimeSpanUnit;
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.command.Command;
@@ -10,12 +12,16 @@ import org.bukkit.entity.Player;
 import de.ksrmx.libs.utils.iteration.ArrayUtils;
 
 import java.util.ArrayList;
+import java.util.EnumSet;
 import java.util.List;
+import java.util.Objects;
 
 public class SeeCommand extends ACommand {
 
     private final TimeLimiter timeLimiter;
     private final Messages messages;
+
+    private final DynamicTimeSpanFormatter timeSpanFormatter = new DynamicTimeSpanFormatter(3, EnumSet.allOf(TimeSpanUnit.class));
 
     public SeeCommand(TimeLimiter timeLimiter, Messages messages) {
         super(ArrayUtils.of("see"), ArrayUtils.of("time-limit.*","time-limit.see"));
@@ -28,16 +34,16 @@ public class SeeCommand extends ACommand {
         if(args.length==0){
             if(sender instanceof Player p){
                 long time = timeLimiter.getPlayTime(p.getUniqueId()).getTime();
-                messages.sendMessage(sender,"command.time-limit.see.success","%TIME%",Long.toString(time));
+                messages.sendMessage(sender,"command.time-limit.see.success","%TIME%", timeSpanFormatter.format(time));
             }else{
                 messages.sendMessage(sender, "command.time-limit.see.not-player");
             }
         }else if(args.length==1 && (sender.hasPermission("time-limit.*") || sender.hasPermission("time-limit.see.others"))){
             boolean success = false;
             for(OfflinePlayer p : Bukkit.getOfflinePlayers()){
-                if(p.getName().equalsIgnoreCase(args[0])){
+                if(Objects.requireNonNull(p.getName()).equalsIgnoreCase(args[0])){
                     long time = timeLimiter.getPlayTime(p.getUniqueId()).getTime();
-                    messages.sendMessage(sender,"command.time-limit.see.others.success", "%PLAYER%", p.getName(),"%TIME%", Long.toString(time));
+                    messages.sendMessage(sender,"command.time-limit.see.others.success", "%PLAYER%", p.getName(),"%TIME%", timeSpanFormatter.format(time));
                     success = true;
                     break;
                 }

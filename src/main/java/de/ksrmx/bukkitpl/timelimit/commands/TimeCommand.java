@@ -9,7 +9,7 @@ public class TimeCommand extends SuperCommand{
     private final Messages messages;
 
     public TimeCommand(TimeLimiter timeLimiter, Messages messages) {
-        super(ArrayUtils.of("time-limit","tl"),
+        super(ArrayUtils.of("time-limit","tl"),messages,
                 new SeeCommand(timeLimiter,messages),
                 new PayCommand(messages, timeLimiter),
                 new GiveCommand(messages, timeLimiter),

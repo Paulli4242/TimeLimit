@@ -111,7 +111,6 @@ public class TimeLimiter implements Runnable{
 
             gotKicked.clear();
             KickTime kickTime = kickTimeQueue.peek();
-            if(kickTime!=null)
             while (kickTime!=null && kickTime.getKickTime()<=currentTime){
                 kickTimeQueue.poll();
                 PlayerData pt = kickTime.getPlayTime();

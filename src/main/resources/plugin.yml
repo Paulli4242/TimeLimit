@@ -8,6 +8,7 @@ commands:
   time-limit:
     usage: time
     description: every command about time
+    aliases: [tl]
 permissions:
   time-limit.see:
     default: true

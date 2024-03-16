@@ -2,26 +2,26 @@ command:
   time-limit:
     invalid: "Unknown Command"
     see:
-      success: "You have %TIME% Seconds left."
+      success: "You have %TIME% left."
       not-player: "Only Players can see their own time."
       invalid: "Unknown arguments"
       others:
-        success: "%PLAYER% has %TIME% Seconds left."
+        success: "%PLAYER% has %TIME% left."
         unknown: "%PLAYER% never played on this server."
     give:
-      success: "Gave %SECONDS% seconds to %PLAYER%."
+      success: "Gave %TIME% to %PLAYER%."
       invalid-number: "\"%NUMBER%\" is not a valid positive integer number format."
       invalid-player: "\"%PLAYER%\" is not a valid player."
       missing-data: "INTERNAL ERROR: Could not find data for player %PLAYER%."
       arg-amount: "Invalid amount of arguments."
     take:
-      success: "Took %SECONDS% seconds from %PLAYER%."
+      success: "Took %TIME% from %PLAYER%."
       invalid-number: "\"%NUMBER%\" is not a valid positive integer number format."
       invalid-player: "\"%PLAYER%\" is not a valid player."
       missing-data: "INTERNAL ERROR: Could not find data for player %PLAYER%."
       arg-amount: "Invalid amount of arguments."
     pay:
-      success: "Gave %SECONDS% seconds to %PLAYER%."
+      success: "Gave %TIME% to %PLAYER%."
       success-target: "%PLAYER% gave you %SECONDS%"
       insufficient: "You do not have enough time."
       invalid-number: "\"%NUMBER%\" is not a valid positive integer number format."

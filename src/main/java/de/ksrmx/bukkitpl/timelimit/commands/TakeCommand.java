@@ -3,6 +3,8 @@ package de.ksrmx.bukkitpl.timelimit.commands;
 import de.ksrmx.bukkitpl.timelimit.Messages;
 import de.ksrmx.bukkitpl.timelimit.main.PlayTime;
 import de.ksrmx.bukkitpl.timelimit.main.TimeLimiter;
+import de.ksrmx.bukkitpl.timelimit.time.DynamicTimeSpanFormatter;
+import de.ksrmx.bukkitpl.timelimit.time.TimeSpanUnit;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
@@ -10,12 +12,14 @@ import org.bukkit.entity.Player;
 import de.ksrmx.libs.utils.iteration.ArrayUtils;
 
 import java.util.ArrayList;
+import java.util.EnumSet;
 import java.util.List;
 
 public class TakeCommand extends ACommand {
 
     private Messages messages;
     private TimeLimiter timeLimiter;
+    private final DynamicTimeSpanFormatter timeSpanFormatter = new DynamicTimeSpanFormatter(3, EnumSet.allOf(TimeSpanUnit.class));
 
     public TakeCommand(Messages messages, TimeLimiter timeLimiter) {
         super(ArrayUtils.of("take"),ArrayUtils.of("time-limit.*","time-limit.take"));
@@ -31,9 +35,9 @@ public class TakeCommand extends ACommand {
                 PlayTime pt = timeLimiter.getPlayTime(player.getUniqueId());
                 if(pt!=null){
                     try{
-                        long l = Long.parseLong(args[1]);
-                        if(pt.removeTime(timeLimiter,l*1000)){
-                            messages.sendMessage(sender,"command.time-limit.take.success","%SECONDS%",Long.toString(l),"%PLAYER%", player.getName());
+                        long l = Long.parseLong(args[1])*1000;
+                        if(pt.removeTime(timeLimiter,l)){
+                            messages.sendMessage(sender,"command.time-limit.take.success","%TIME%", timeSpanFormatter.format(l),"%PLAYER%", player.getName());
                         }else{
                             messages.sendMessage(sender,"command.time-limit.take.invalid-number","%NUMBER%", args[1]);
                         }
